@@ -1,19 +1,19 @@
-# Redis Data Seeding and Migration with Docker, Python, and RIOT
+# Redis Data Seeding and Migration.
 
 This project demonstrates a fully automated workflow for:
-- **Seeding** a Redis Stack instance with different data types (hash, geo, bloom filter, vector, JSON, etc.) via Python.
-- **Migrating** all data (including Redis modules) from a source Redis to a destination Redis using [RIOT](https://github.com/redis-developer/riot).
+- **Seeding** a Redis Stack with different data types (hash, geo, bloom filter, vector, JSON, etc.) via Python.
+- **Migrating** all data (including Redis modules) from a source Redis to a destination Redis.
 
-All steps run via **Docker Compose** – no manual intervention needed.
+All steps run via **Docker Compose**.
 
 ---
 
 ## Project Structure
 
 
-├── docker-compose.yaml # Service definitions and orchestration
+├── docker-compose.yaml # Service definitions
 
-├── Dockerfile # Python environment for data seeding
+├── Dockerfile # Python environment
 
 ├── requirements.txt # Python dependencies
 
@@ -27,10 +27,9 @@ All steps run via **Docker Compose** – no manual intervention needed.
 ## How It Works
 
 1. **Source Redis** (`redis-src`) and **Destination Redis** (`redis-dst`) are started as Redis Stack containers.
-2. **Seeder service** (Python-based) waits for source Redis to be ready, then seeds various data types.
-3. **RIOT migrator service** waits for both Redis instances, then migrates **all data** (including modules) from `redis-src` to `redis-dst` using [RIOT](https://github.com/redis-developer/riot).
-4. No manual commands are needed.  
-5. At the end, both the seeded and migrated data can be verified using `redis-cli`.
+2. **Seeder service** (Python-based) waits for source Redis to be ready and then seeds various data types.
+3. **RIOT migrator service** waits for both Redis instances, then migrates **all data** (including modules) from `redis-src` to `redis-dst` .
+4. At the end, both the seeded and migrated data can be verified using `redis-cli`.
 
 ---
 
@@ -38,8 +37,8 @@ All steps run via **Docker Compose** – no manual intervention needed.
 
 | File                | Purpose                                                                 |
 |---------------------|-------------------------------------------------------------------------|
-| `docker-compose.yaml` | Orchestrates all containers: source Redis, destination Redis, seeder, and migrator. |
-| `Dockerfile`        | Python image for the seeder service.                                    |
+| `docker-compose.yaml` | Orchestrates all containers: source Redis, destination Redis, seeder and migrator. |
+| `Dockerfile`        | Python image for the seeding.                                    |
 | `requirements.txt`  | Lists Python dependencies for the seeder.                               |
 | `seed_data.py`      | Seeds hashes, geo, bloom filter, vectors, JSON, etc. into `redis-src`.  |
 | `riot_migrate.sh`   | Waits for both Redis servers, then migrates all data via RIOT.          |
